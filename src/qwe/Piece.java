@@ -1,5 +1,5 @@
 package qwe;
 
-public enum PieceColor {
+public enum Piece {
 	B, W
 }
