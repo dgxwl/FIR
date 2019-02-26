@@ -19,7 +19,7 @@ public class World extends JPanel {
 	public static final int HEIGHT = ROWS * BLOCK_SIZE + 60;
 	public static final int OFFSET = 20;
 	public static final int STAR_RADIUS = 3;
-	public static final int PIECE_RADIUS = 9;
+	public static final int PIECE_RADIUS = BLOCK_SIZE / 2 - 1;
 
 	private static Piece nextColor = Piece.B;
 
@@ -34,12 +34,12 @@ public class World extends JPanel {
 				if (blackWin || whiteWin) {
 					return ;
 				}
-				int col = (e.getX() - OFFSET + 9) / BLOCK_SIZE;
-				int row = (e.getY() - OFFSET + 9) / BLOCK_SIZE;
+				int col = (e.getX() - OFFSET + PIECE_RADIUS) / BLOCK_SIZE;
+				int row = (e.getY() - OFFSET + PIECE_RADIUS) / BLOCK_SIZE;
 				if (col > 14 || row > 14) {
 					return;
 				}
-				System.out.println("col: " + col + ", row: " + row);
+
 				board[col][row] = nextColor;
 				checkWin();
 				repaint();
@@ -151,13 +151,17 @@ public class World extends JPanel {
 			g.drawString("黑棋赢!", WIDTH / 2, HEIGHT / 2);
 		}
 		if (whiteWin) {
-			g.setFont(new Font(null, 0, 66));
+			g.setFont(new Font(null, 0, 50));
 			g.setColor(Color.BLACK);
 			g.drawString("白棋赢!", WIDTH / 2, HEIGHT / 2);
 		}
 	}
 
 	public static void main(String[] args) {
+		//选择模式窗口
+		
+		
+		//棋盘窗口
 		JFrame frame = new JFrame("fir");
 		frame.setSize(WIDTH, HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
