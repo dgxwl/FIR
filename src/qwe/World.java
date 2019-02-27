@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class World extends JPanel {
@@ -21,22 +20,22 @@ public class World extends JPanel {
 	public static final int STAR_RADIUS = 3;
 	public static final int PIECE_RADIUS = BLOCK_SIZE / 2 - 1;
 
-	private static Piece nextColor = Piece.B;
+	protected static Piece nextColor = Piece.B;
 
-	private Piece[][] board = new Piece[COLS][ROWS];
-	private boolean blackWin = false;
-	private boolean whiteWin = false;
+	protected Piece[][] board = new Piece[COLS][ROWS];
+	protected boolean blackWin = false;
+	protected boolean whiteWin = false;
 
 	public void addListener() {
 		MouseAdapter l = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (blackWin || whiteWin) {
-					return ;
+					return;
 				}
 				int col = (e.getX() - OFFSET + PIECE_RADIUS) / BLOCK_SIZE;
 				int row = (e.getY() - OFFSET + PIECE_RADIUS) / BLOCK_SIZE;
-				if (col > 14 || row > 14) {
+				if (col > COLS - 1 || row > ROWS - 1) {
 					return;
 				}
 
@@ -50,13 +49,13 @@ public class World extends JPanel {
 	}
 
 	public void checkWin() {
-		for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 15; j++) {
+		for (int i = 0; i < COLS; i++) {
+			for (int j = 0; j < ROWS; j++) {
 				if (board[i][j] == null) {
 					continue;
 				}
 
-				if (!(i + 1 > 14) || !(i + 2 > 14) || !(i + 3 > 14) || !(i + 4 > 14)) {
+				if (!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1)) {
 					if (board[i][j] == nextColor && board[i + 1][j] == nextColor && board[i + 2][j] == nextColor
 							&& board[i + 3][j] == nextColor && board[i + 4][j] == nextColor) {
 						if (nextColor == Piece.B) {
@@ -67,7 +66,7 @@ public class World extends JPanel {
 					}
 				}
 
-				if (!(j + 1 > 14) || !(j + 2 > 14) || !(j + 3 > 14) || !(j + 4 > 14)) {
+				if (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1)) {
 					if (board[i][j] == nextColor && board[i][j + 1] == nextColor && board[i][j + 2] == nextColor
 							&& board[i][j + 3] == nextColor && board[i][j + 4] == nextColor) {
 						if (nextColor == Piece.B) {
@@ -77,9 +76,9 @@ public class World extends JPanel {
 						}
 					}
 				}
-				
-				if ((!(i + 1 > 14) || !(i + 2 > 14) || !(i + 3 > 14) || !(i + 4 > 14)) &&
-						(!(j + 1 > 14) || !(j + 2 > 14) || !(j + 3 > 14) || !(j + 4 > 14))) {
+
+				if ((!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1))
+						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1))) {
 					if (board[i][j] == nextColor && board[i + 1][j + 1] == nextColor && board[i + 2][j + 2] == nextColor
 							&& board[i + 3][j + 3] == nextColor && board[i + 4][j + 4] == nextColor) {
 						if (nextColor == Piece.B) {
@@ -89,9 +88,9 @@ public class World extends JPanel {
 						}
 					}
 				}
-				
-				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0)) &&
-						(!(j + 1 > 14) || !(j + 2 > 14) || !(j + 3 > 14) || !(j + 4 > 14))) {
+
+				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0))
+						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1))) {
 					if (board[i][j] == nextColor && board[i - 1][j + 1] == nextColor && board[i - 2][j + 2] == nextColor
 							&& board[i - 3][j + 3] == nextColor && board[i - 4][j + 4] == nextColor) {
 						if (nextColor == Piece.B) {
@@ -117,7 +116,7 @@ public class World extends JPanel {
 		g.fillOval(col * BLOCK_SIZE - PIECE_RADIUS + OFFSET, row * BLOCK_SIZE - PIECE_RADIUS + OFFSET, PIECE_RADIUS * 2,
 				PIECE_RADIUS * 2);
 	}
-
+	
 	@Override
 	public void paint(Graphics g) {
 		// ********************** 画棋盘 ***************************
@@ -148,30 +147,12 @@ public class World extends JPanel {
 		if (blackWin) {
 			g.setFont(new Font(null, 0, 50));
 			g.setColor(Color.WHITE);
-			g.drawString("黑棋赢!", WIDTH / 2, HEIGHT / 2);
+			g.drawString("黑子赢!", WIDTH / 2, HEIGHT / 2);
 		}
 		if (whiteWin) {
 			g.setFont(new Font(null, 0, 50));
 			g.setColor(Color.BLACK);
-			g.drawString("白棋赢!", WIDTH / 2, HEIGHT / 2);
+			g.drawString("白子赢!", WIDTH / 2, HEIGHT / 2);
 		}
-	}
-
-	public static void main(String[] args) {
-		//选择模式窗口
-		
-		
-		//棋盘窗口
-		JFrame frame = new JFrame("fir");
-		frame.setSize(WIDTH, HEIGHT);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
-
-		World world = new World();
-		world.addListener();
-		frame.add(world);
-
-		frame.setVisible(true);
 	}
 }
