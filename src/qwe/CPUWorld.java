@@ -495,68 +495,348 @@ public class CPUWorld extends World {
 					}
 				}
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				// 活二__●●__左边那颗
+				// 活二__●●__最左边那颗
 				// 1.横向
-				if (!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1)) {
-					if (board[i + 1][j] == aiColor && board[i + 2][j] == aiColor && board[i + 3][j] == null) {
+				if (!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1) || !(i + 5 > COLS - 1)) {
+					if (board[i + 1][j] == null && board[i + 2][j] == aiColor && board[i + 3][j] == aiColor
+							&& board[i + 4][j] == null && board[i + 5][j] == null) {
 						weight[i][j] += PRIORITY_3;
 					}
 				}
 				//2.纵向
-				if (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1)) {
-					if (board[i][j + 1] == aiColor && board[i][j + 2] == aiColor && board[i][j + 3] == null) {
+				if (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1) || !(j + 5 > ROWS - 1)) {
+					if (board[i][j + 1] == null && board[i][j + 2] == aiColor
+							&& board[i][j + 3] == aiColor && board[i][j + 4] == null && board[i][j + 5] == null) {
 						weight[i][j] += PRIORITY_3;
 					}
 				}
 				//3.左上至右下
-				if ((!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1))
-						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1))) {
-					if (board[i + 1][j + 1] == aiColor && board[i + 2][j + 2] == aiColor && board[i + 3][j + 3] == null) {
+				if ((!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1) || !(i + 5 > COLS - 1))
+						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1) || !(j + 5 > ROWS - 1))) {
+					if (board[i + 1][j + 1] == null && board[i + 2][j + 2] == aiColor
+							&& board[i + 3][j + 3] == aiColor && board[i + 4][j + 4] == null && board[i + 5][j + 5] == null) {
 						weight[i][j] += PRIORITY_3;
 					}
 				}
 				//4.右上至左下
-				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0))
-						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1))) {
-					if (board[i - 1][j + 1] == aiColor && board[i - 2][j + 2] == aiColor && board[i - 3][j + 3] == null) {
+				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0) || !(i - 5 < 0))
+						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1) || !(j + 5 > ROWS - 1))) {
+					if (board[i - 1][j + 1] == null && board[i - 2][j + 2] == aiColor
+							&& board[i - 3][j + 3] == aiColor && board[i - 4][j + 4] == null && board[i - 5][j + 5] == null) {
 						weight[i][j] += PRIORITY_3;
 					}
 				}
 				
-				// 活二_●●_右边那颗
+				// 活二__●●__左二那颗
 				// 1.横向
-				if (!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0)) {
-					if (board[i - 1][j] == aiColor && board[i - 2][j] == aiColor && board[i - 3][j] == null) {
+				if (!(i - 1 < 0) || !(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1)) {
+					if (board[i - 1][j] == null && board[i + 1][j] == aiColor && board[i + 2][j] == aiColor
+							&& board[i + 3][j] == null && board[i + 4][j] == null) {
 						weight[i][j] += PRIORITY_3;
 					}
 				}
 				//2.纵向
-				if (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0)) {
-					if (board[i][j - 1] == aiColor && board[i][j - 2] == aiColor && board[i][j - 3] == null) {
+				if (!(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1)) {
+					if (board[i][j - 1] == null && board[i][j + 1] == aiColor
+							&& board[i][j + 2] == aiColor && board[i][j + 3] == null && board[i][j + 4] == null) {
 						weight[i][j] += PRIORITY_3;
 					}
 				}
-				//3.右下至左上
-				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0))
-						&& (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0))) {
-					if (board[i - 1][j - 1] == aiColor && board[i - 2][j - 2] == aiColor && board[i - 3][j - 3] == null) {
+				//3.左上至右下
+				if ((!(i - 1 < 0) || !(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1))
+						&& (!(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1))) {
+					if (board[i - 1][j - 1] == null && board[i + 1][j + 1] == aiColor
+							&& board[i + 2][j + 2] == aiColor && board[i + 3][j + 3] == null && board[i + 4][j + 4] == null) {
 						weight[i][j] += PRIORITY_3;
 					}
 				}
-				//4.左下至右上
-				if ((!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1))
-						&& (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0))) {
-					if (board[i + 1][j - 1] == aiColor && board[i + 2][j - 2] == aiColor && board[i + 3][j - 3] == null) {
+				//4.右上至左下
+				if ((!(i + 1 < COLS - 1) || !(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0))
+						&& (!(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1))) {
+					if (board[i + 1][j - 1] == null && board[i - 1][j + 1] == aiColor
+							&& board[i - 2][j + 2] == aiColor && board[i - 3][j + 3] == null && board[i - 4][j + 4] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				
+				// 活二__●●__右二那颗
+				// 1.横向
+				if (!(i - 4 < 0) || !(i - 3 < 0) || !(i - 2 < 0) || !(i - 1 < 0) || !(i + 1 > COLS - 1)) {
+					if (board[i - 4][j] == null && board[i - 3][j] == null && board[i - 2][j] == aiColor
+							&& board[i - 1][j] == aiColor && board[i + 1][j] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//2.纵向
+				if (!(j - 4 < 0) || !(j - 3 < 0) || !(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1)) {
+					if (board[i][j - 4] == null && board[i][j - 3] == null && board[i][j - 2] == aiColor
+							&& board[i][j - 1] == aiColor && board[i][j + 1] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//3.左上至右下
+				if ((!(i - 4 < 0) || !(i - 3 < 0) || !(i - 2 < 0) || !(i - 1 < 0) || !(i + 1 > COLS - 1))
+						&& (!(j - 4 < 0) || !(j - 3 < 0) || !(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1))) {
+					if (board[i - 4][j - 4] == null && board[i - 3][j - 3] == null
+							&& board[i - 2][j - 2] == aiColor && board[i - 1][j - 1] == aiColor && board[i + 1][j + 1] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//4.右上至左下
+				if ((!(i + 4 < COLS - 1) || !(i + 3 < COLS - 1) || !(i + 2 < COLS - 1) || !(i + 1 < COLS - 1) || !(i - 1 < 0))
+						&& (!(j - 4 < 0) || !(j - 3 < 0) || !(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1))) {
+					if (board[i + 4][j - 4] == null && board[i - 3][j + 3] == aiColor
+							&& board[i - 2][j + 2] == aiColor && board[i - 1][j + 1] == null && board[i - 1][j + 1] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				
+				// 活二__●●__最右边那颗
+				// 1.横向
+				if (!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0) || !(i - 5 < 0)) {
+					if (board[i - 1][j] == null && board[i - 2][j] == aiColor && board[i - 3][j] == aiColor
+							&& board[i - 4][j] == null && board[i - 5][j] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//2.纵向
+				if (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0) || !(j - 4 < 0) || !(j - 5 < 0)) {
+					if (board[i][j - 1] == null && board[i][j - 2] == aiColor
+							&& board[i][j - 3] == aiColor && board[i][j - 4] == null && board[i][j - 5] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//3.左上至右下
+				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0) || !(i - 5 < 0))
+						&& (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0) || !(j - 4 < 0) || !(j - 5 < 0))) {
+					if (board[i - 1][j - 1] == null && board[i - 2][j - 2] == aiColor
+							&& board[i - 3][j - 3] == aiColor && board[i - 4][j - 4] == null && board[i - 5][j - 5] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//4.右上至左下
+				if ((!(i + 1 > COLS - 1) || !(i + 2  > COLS - 1) || !(i + 3  > COLS - 1) || !(i + 4  > COLS - 1) || !(i + 5  > COLS - 1))
+						&& (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0) || !(j - 4 < 0) || !(j - 5 < 0))) {
+					if (board[i + 1][j - 1] == null && board[i + 2][j - 2] == aiColor
+							&& board[i + 3][j - 3] == aiColor && board[i + 4][j - 4] == null && board[i + 5][j - 5] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				
+				// 活二_●_●_最左边那颗
+				// 1.横向
+				if (!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1)) {
+					if (board[i + 1][j] == aiColor && board[i + 2][j] == null && board[i + 3][j] == aiColor && board[i + 4][j] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//2.纵向
+				if (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1)) {
+					if (board[i][j + 1] == aiColor && board[i][j + 2] == null && board[i][j + 3] == aiColor && board[i][j + 4] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//3.左上至右下
+				if ((!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1))
+						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1))) {
+					if (board[i + 1][j + 1] == aiColor && board[i + 2][j + 2] == null
+							&& board[i + 3][j + 3] == aiColor && board[i + 4][j + 4] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//4.右上至左下
+				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0))
+						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1))) {
+					if (board[i - 1][j + 1] == aiColor && board[i - 2][j + 2] == null
+							&& board[i - 3][j + 3] == aiColor && board[i - 4][j + 4] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				
+				// 活二_●_●_中间那颗
+				// 1.横向
+				if (!(i - 2 < 0) || !(i - 1 < 0) || !(i + 1 > COLS - 1) || !(i + 2 > COLS - 1)) {
+					if (board[i - 2][j] == null && board[i - 1][j] == aiColor && board[i + 1][j] == aiColor && board[i + 2][j] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//2.纵向
+				if (!(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1)) {
+					if (board[i][j - 2] == null && board[i][j - 1] == aiColor && board[i][j + 1] == aiColor && board[i][j + 2] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//3.左上至右下
+				if ((!(i - 2 < 0) || !(i - 1 < 0) || !(i + 1 > COLS - 1) || !(i + 2 > COLS - 1))
+						&& (!(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1))) {
+					if (board[i - 2][j - 2] == null && board[i - 1][j - 1] == aiColor
+							&& board[i + 1][j + 1] == aiColor && board[i + 2][j + 2] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//4.右上至左下
+				if ((!(i + 2 < COLS - 1) || !(i + 1 < COLS - 1) || !(i - 1 < 0) || !(i - 2 < 0))
+						&& (!(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1))) {
+					if (board[i + 2][j - 2] == null && board[i + 1][j - 1] == aiColor
+							&& board[i - 1][j + 1] == aiColor && board[i - 2][j + 2] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				
+				// 活二_●_●_最右边那颗
+				// 1.横向
+				if (!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0)) {
+					if (board[i - 1][j] == aiColor && board[i - 2][j] == null && board[i - 3][j] == aiColor && board[i - 4][j] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//2.纵向
+				if (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0) || !(j - 4 < 0)) {
+					if (board[i][j - 1] == aiColor && board[i][j - 2] == null && board[i][j - 3] == aiColor && board[i][j - 4] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//3.左上至右下
+				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0))
+						&& (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0) || !(j - 4 < 0))) {
+					if (board[i - 1][j - 1] == aiColor && board[i - 2][j - 2] == null
+							&& board[i - 3][j - 3] == aiColor && board[i - 4][j - 4] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//4.右上至左下
+				if ((!(i + 1 > COLS - 1) || !(i + 2  > COLS - 1) || !(i + 3  > COLS - 1) || !(i + 4  > COLS - 1))
+						&& (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0) || !(j - 4 < 0))) {
+					if (board[i + 1][j - 1] == aiColor && board[i + 2][j - 2] == null
+							&& board[i + 3][j - 3] == aiColor && board[i + 4][j - 4] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				
+				// 活二_●__●_最左边那颗
+				// 1.横向
+				if (!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1) || !(i + 5 > COLS - 1)) {
+					if (board[i + 1][j] == aiColor && board[i + 2][j] == null && board[i + 3][j] == null
+							&& board[i + 4][j] == aiColor && board[i + 5][j] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//2.纵向
+				if (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1) || !(j + 5 > ROWS - 1)) {
+					if (board[i][j + 1] == aiColor && board[i][j + 2] == null && board[i][j + 3] == null
+							&& board[i][j + 4] == aiColor && board[i][j + 5] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//3.左上至右下
+				if ((!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1) || !(i + 5 > COLS - 1))
+						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1) || !(j + 5 > ROWS - 1))) {
+					if (board[i + 1][j + 1] == aiColor && board[i + 2][j + 2] == null && board[i + 3][j + 3] == null
+							&& board[i + 4][j + 4] == aiColor && board[i + 5][j + 5] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//4.右上至左下
+				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0) || !(i - 5 < 0))
+						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1) || !(j + 5 > ROWS - 1))) {
+					if (board[i - 1][j + 1] == aiColor && board[i - 2][j + 2] == null && board[i - 3][j + 3] == null
+							&& board[i - 4][j + 4] == aiColor && board[i - 5][j + 5] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				
+				// 活二_●__●_左二那颗
+				// 1.横向
+				if (!(i - 2 < 0) || !(i - 1 < 0) || !(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1)) {
+					if (board[i - 2][j] == null && board[i - 1][j] == aiColor && board[i + 1][j] == null
+							&& board[i + 2][j] == aiColor && board[i + 3][j] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//2.纵向
+				if (!(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1)) {
+					if (board[i][j - 2] == null && board[i][j - 1] == aiColor && board[i][j + 1] == null
+							&& board[i][j + 2] == aiColor && board[i][j + 3] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//3.左上至右下
+				if ((!(i - 2 < 0) || !(i - 1 < 0) || !(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1))
+						&& (!(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1))) {
+					if (board[i - 2][j - 2] == null && board[i - 1][j - 1] == aiColor && board[i + 1][j + 1] == null
+							&& board[i + 2][j + 2] == aiColor && board[i + 3][j + 3] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//4.右上至左下
+				if ((!(i + 2 > COLS - 1) || !(i + 1 > COLS - 1) || !(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0))
+						&& (!(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1))) {
+					if (board[i + 2][j - 2] == null && board[i + 1][j - 1] == aiColor && board[i - 1][j + 1] == null
+							&& board[i - 2][j + 2] == aiColor && board[i - 3][j + 3] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				
+				// 活二_●__●_右二那颗
+				// 1.横向
+				if (!(i - 3 < 0) || !(i - 2 < 0) || !(i - 1 < 0) || !(i + 1 > COLS - 1) || !(i + 2 > COLS - 1)) {
+					if (board[i - 3][j] == null && board[i - 2][j] == aiColor && board[i - 1][j] == null
+							&& board[i + 1][j] == aiColor && board[i + 2][j] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//2.纵向
+				if (!(j - 3 < 0) || !(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1)) {
+					if (board[i][j - 3] == null && board[i][j - 2] == aiColor && board[i][j - 1] == null
+							&& board[i][j + 1] == aiColor && board[i][j + 2] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//3.左上至右下
+				if ((!(i - 3 < 0) || !(i - 2 < 0) || !(i - 1 < 0) || !(i + 1 > COLS - 1) || !(i + 2 > COLS - 1))
+						&& (!(j - 2 < 0) || !(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1))) {
+					if (board[i - 3][j - 3] == null && board[i - 2][j - 2] == aiColor && board[i - 1][j - 1] == null
+							&& board[i + 1][j + 1] == aiColor && board[i + 2][j + 2] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//4.右上至左下
+				if ((!(i + 3 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 1 > COLS - 1) || !(i - 1 < 0) || !(i - 2 < 0))
+						&& (!(j - 3 < 0) || !(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1))) {
+					if (board[i + 3][j - 3] == null && board[i + 2][j - 2] == aiColor && board[i + 1][j - 1] == null
+							&& board[i - 1][j + 1] == aiColor && board[i - 2][j + 2] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				
+				// 活二_●__●_最右边那颗
+				// 1.横向
+				if (!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0) || !(i - 5 < 0)) {
+					if (board[i - 1][j] == aiColor && board[i - 2][j] == null && board[i - 3][j] == null
+							&& board[i - 4][j] == aiColor && board[i - 5][j] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//2.纵向
+				if (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0) || !(j - 4 < 0) || !(j - 5 < 0)) {
+					if (board[i][j - 1] == aiColor && board[i][j - 2] == null && board[i][j - 3] == null
+							&& board[i][j - 4] == aiColor && board[i][j - 5] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//3.左上至右下
+				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0) || !(i - 5 < 0))
+						&& (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0) || !(j - 4 < 0) || !(j - 5 < 0))) {
+					if (board[i - 1][j - 1] == aiColor && board[i - 2][j - 2] == null && board[i - 3][j - 3] == null
+							&& board[i - 4][j - 4] == aiColor && board[i - 5][j - 5] == null) {
+						weight[i][j] += PRIORITY_3;
+					}
+				}
+				//4.右上至左下
+				if ((!(i + 1 < 0) || !(i + 2 < 0) || !(i + 3 < 0) || !(i + 4 < 0) || !(i + 5 < 0))
+						&& (!(j - 1 > ROWS - 1) || !(j - 2 > ROWS - 1) || !(j - 3 > ROWS - 1) || !(j - 4 > ROWS - 1) || !(j - 5 > ROWS - 1))) {
+					if (board[i + 1][j - 1] == aiColor && board[i + 2][j - 2] == null && board[i + 3][j - 3] == null
+							&& board[i + 4][j - 4] == aiColor && board[i + 5][j - 5] == null) {
 						weight[i][j] += PRIORITY_3;
 					}
 				}
@@ -620,6 +900,74 @@ public class CPUWorld extends World {
 						weight[i][j] += PRIORITY_2;
 					}
 				}
+				
+				//眠三_●_●●○左边那颗
+				// 1.横向
+				if (!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1) || !(i + 5 > COLS - 1)) {
+					if (board[i + 1][j] == aiColor && board[i + 2][j] == null && board[i + 3][j] == aiColor
+							&& board[i + 4][j] == aiColor && board[i + 5][j] == anotherColor) {
+						weight[i][j] += PRIORITY_2;
+					}
+				}
+				//2.纵向
+				if (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1) || !(j + 5 > ROWS - 1)) {
+					if (board[i][j + 1] == aiColor && board[i][j + 2] == null && board[i][j + 3] == aiColor
+							&& board[i][j + 4] == aiColor && board[i][j + 5] == anotherColor) {
+						weight[i][j] += PRIORITY_2;
+					}
+				}
+				//3.左上至右下
+				if ((!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1) || !(i + 5 > COLS - 1))
+						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1) || !(j + 5 > ROWS - 1))) {
+					if (board[i + 1][j + 1] == aiColor && board[i + 2][j + 2] == null
+							&& board[i + 3][j + 3] == aiColor && board[i + 4][j + 4] == aiColor && board[i + 5][j + 5] == anotherColor) {
+						weight[i][j] += PRIORITY_2;
+					}
+				}
+				//4.右上至左下
+				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0) || !(i - 5 < 0))
+						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1) || !(j + 5 > ROWS - 1))) {
+					if (board[i - 1][j + 1] == aiColor && board[i - 2][j + 2] == aiColor
+							&& board[i - 3][j + 3] == aiColor && board[i - 4][j + 4] == aiColor && board[i - 5][j + 5] == anotherColor) {
+						weight[i][j] += PRIORITY_2;
+					}
+				}
+				
+				//眠三_●_●●○右边那颗
+				// 1.横向
+				if (!(i - 2 < 0) || !(i - 1 < 0) || !(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1)) {
+					if (board[i - 2][j] == null && board[i - 1][j] == aiColor && board[i + 1][j] == aiColor
+							&& board[i + 2][j] == aiColor && board[i + 3][j] == anotherColor) {
+						weight[i][j] += PRIORITY_2;
+					}
+				}
+				//2.纵向
+				if (!(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1)) {
+					if (board[i][j - 2] == null && board[i][j - 1] == aiColor && board[i][j + 1] == aiColor
+							&& board[i][j + 2] == aiColor && board[i][j + 3] == anotherColor) {
+						weight[i][j] += PRIORITY_2;
+					}
+				}
+				//3.左上至右下
+				if ((!(i - 2 < 0) || !(i - 1 < 0) || !(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1))
+						&& (!(j - 2 < 0) || !(j - 1 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1))) {
+					if (board[i - 2][j - 2] == null && board[i - 1][j - 1] == aiColor && board[i + 1][j + 1] == aiColor
+							&& board[i + 2][j + 2] == aiColor && board[i + 3][j + 3] == anotherColor) {
+						weight[i][j] += PRIORITY_2;
+					}
+				}
+				//4.右上至左下
+				if ((!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0))
+						&& (!(j - 1 < 0) || !(j - 2 < 0) || !(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1))) {
+					if (board[i + 1][j - 1] == aiColor && board[i + 2][j - 2] == null
+							&& board[i - 1][j + 1] == aiColor && board[i - 2][j + 2] == aiColor && board[i - 3][j + 3] == anotherColor) {
+						weight[i][j] += PRIORITY_2;
+					}
+				}
+				
+				//眠三○●●_●_左边
+				// 1.横向
+				
 			}
 		}
 	}
