@@ -3,12 +3,10 @@ package qwe;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-public class World extends JPanel {
+public abstract class World extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	public static final int COLS = 15;
@@ -26,27 +24,7 @@ public class World extends JPanel {
 	protected boolean blackWin = false;
 	protected boolean whiteWin = false;
 
-	public void addListener() {
-		MouseAdapter l = new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (blackWin || whiteWin) {
-					return;
-				}
-				int col = (e.getX() - OFFSET + PIECE_RADIUS) / BLOCK_SIZE;
-				int row = (e.getY() - OFFSET + PIECE_RADIUS) / BLOCK_SIZE;
-				if (col > COLS - 1 || row > ROWS - 1) {
-					return;
-				}
-
-				board[col][row] = nextColor;
-				checkWin();
-				repaint();
-				nextColor = (nextColor == Piece.B) ? Piece.W : Piece.B;
-			}
-		};
-		this.addMouseListener(l);
-	}
+	public abstract void addListener();
 
 	public void checkWin() {
 		for (int i = 0; i < COLS; i++) {
