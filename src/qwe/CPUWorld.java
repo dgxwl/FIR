@@ -18,7 +18,7 @@ public class CPUWorld extends World {
 	private boolean firstDrop = true;
 
 	private int[][] cpuWeight;
-	private int[][] playerWeight;
+	private int[][] playerWeight;     int qq, rr;
 	
 	public void addListener() {
 		MouseAdapter l = new MouseAdapter() {
@@ -35,21 +35,8 @@ public class CPUWorld extends World {
 				if (col < 0 || row < 0 || col > COLS - 1 || row > ROWS - 1) {
 					return;
 				}
-				
-				if (firstDrop) {
-					playerWeight = new int[COLS][ROWS];
-					playerWeight[col - 1][row - 1] = 1;
-					playerWeight[col][row - 1] = 1;
-					playerWeight[col + 1][row - 1] = 1;
-					playerWeight[col - 1][row] = 1;
-					playerWeight[col + 1][row] = 1;
-					playerWeight[col - 1][row + 1] = 1;
-					playerWeight[col][row + 1] = 1;
-					playerWeight[col + 1][row + 1] = 1;
-					firstDrop = false;
-				}
 
-				board[col][row] = nextColor;
+				board[col][row] = nextColor;qq = col; rr = row;
 				checkWin();
 				repaint();
 				
@@ -112,7 +99,7 @@ public class CPUWorld extends World {
 		List<Integer> playerMaxI = new ArrayList<>();  //记录所有最高分位置的i
 		playerMaxI.add(playerMaxSocreI);
 		List<Integer> playerMaxJ = new ArrayList<>();  //记录所有最高分位置的j
-		playerMaxJ.add(playerMaxSocreJ);
+		playerMaxJ.add(playerMaxSocreJ);System.out.println(playerMaxI);System.out.println(playerMaxJ);
 		for (int i = 0; i < playerWeight.length; i++) {
 			for (int j = 0; j < playerWeight[i].length; j++) {
 				if (i == playerMaxSocreI && j == playerMaxSocreJ) {
@@ -134,6 +121,8 @@ public class CPUWorld extends World {
 				int maxScore = 0;
 				for (int i : cpuMaxI) {
 					for (int j : cpuMaxJ) {
+						maxI = i;
+						maxJ = j;
 						if (playerWeight[i][j] > maxScore) {
 							maxScore = playerWeight[i][j];
 							maxI = i;
@@ -141,9 +130,9 @@ public class CPUWorld extends World {
 						}
 					}
 				}
-				board[maxI][maxJ] = nextColor;System.out.println("col: " + maxI + ", row: " + maxJ);
+				board[maxI][maxJ] = nextColor;
 			} else {
-				board[cpuMaxSocreI][cpuMaxSocreJ] = nextColor;System.out.println("col: " + cpuMaxSocreI + ", row: " + cpuMaxSocreJ);
+				board[cpuMaxSocreI][cpuMaxSocreJ] = nextColor;
 			}
 		} else {  //防守
 			//有多个玩家最高分位置, 下其中cpu最高分位置
@@ -153,6 +142,8 @@ public class CPUWorld extends World {
 				int maxScore = 0;
 				for (int i : playerMaxI) {
 					for (int j : playerMaxJ) {
+						maxI = i;
+						maxJ = j;
 						if (cpuWeight[i][j] > maxScore) {
 							maxScore = cpuWeight[i][j];
 							maxI = i;
@@ -160,22 +151,22 @@ public class CPUWorld extends World {
 						}
 					}
 				}
-				board[maxI][maxJ] = nextColor;System.out.println("col: " + maxI + ", row: " + maxJ);
+				board[maxI][maxJ] = nextColor;System.out.println("呵呵col: " + maxI + ", row: " + maxJ);
 			} else {
-				board[playerMaxSocreI][playerMaxSocreJ] = nextColor;System.out.println("col: " + playerMaxSocreI + ", row: " + playerMaxSocreJ);
+				board[playerMaxSocreI][playerMaxSocreJ] = nextColor;System.out.println("哈哈col: " + playerMaxSocreI + ", row: " + playerMaxSocreJ);
 			}
 		}
 		
 		nextColor = (nextColor == Piece.B) ? Piece.W : Piece.B;
 	}
 
-	public int[][] countWeight(Piece confirmColor) {
+	public int[][] countWeight(Piece confirmColor) {System.out.println("qq: " + qq + "rr: " + rr + ", clor: " + board[qq][rr]);
 		int[][] weight = new int[COLS][ROWS]; // 所有位置的权值
 
 		// 遍历棋盘计算权值
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
-				if (board[i][j] != null) {
+				if (!firstDrop && board[i][j] != null) {
 					continue;
 				}
 
@@ -409,7 +400,7 @@ public class CPUWorld extends World {
 					}
 				}
 				//4.右上至左下
-				if (!(i - 1 < 0) && !(j + 4 > ROWS - 1)) {
+				if (!(i - 4 < 0) && !(j + 4 > ROWS - 1)) {
 					if (board[i - 1][j + 1] == confirmColor && board[i - 2][j + 2] == confirmColor
 							&& board[i - 3][j + 3] == confirmColor && board[i - 4][j + 4] == null) {
 						weight[i][j] += PRIORITY_4;
@@ -629,7 +620,7 @@ public class CPUWorld extends World {
 				if (!(i + 5 > COLS - 1)) {
 					if (board[i + 1][j] == null && board[i + 2][j] == confirmColor && board[i + 3][j] == confirmColor
 							&& board[i + 4][j] == null && board[i + 5][j] == null) {
-						weight[i][j] += PRIORITY_3;if (nextColor == Piece.B) {System.out.println("!!!!!!!!");}
+						weight[i][j] += PRIORITY_3;
 					}
 				}
 				//2.纵向
@@ -814,8 +805,7 @@ public class CPUWorld extends World {
 					}
 				}
 				//3.左上至右下
-				if (!(i - 4 < 0)
-						&& (!(j - 1 < 0) || !(j - 2 < 0) || !(j - 3 < 0) || !(j - 4 < 0))) {
+				if (!(i - 4 < 0) && !(j - 4 < 0)) {
 					if (board[i - 1][j - 1] == confirmColor && board[i - 2][j - 2] == null
 							&& board[i - 3][j - 3] == confirmColor && board[i - 4][j - 4] == null) {
 						weight[i][j] += PRIORITY_3;
@@ -1351,7 +1341,7 @@ public class CPUWorld extends World {
 					}
 				}
 				//3.左上至右下
-				if ((!(i - 2 < 0) && !(i + 2 > COLS - 1)) && (!(j - 2 < 0) && !!(j + 2 > ROWS - 1))) {
+				if ((!(i - 2 < 0) && !(i + 2 > COLS - 1)) && (!(j - 2 < 0) && !(j + 2 > ROWS - 1))) {
 					if (board[i - 2][j - 2] == confirmColor && board[i - 1][j - 1] == null
 							&& board[i + 1][j + 1] == confirmColor && board[i + 2][j + 2] == confirmColor) {
 						weight[i][j] += PRIORITY_2;
@@ -1981,22 +1971,19 @@ public class CPUWorld extends World {
 					}
 				}
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				if (firstDrop && confirmColor == Piece.B) {
+					if (board[i][j] != null) {
+						weight[i - 1][j - 1] = 1;
+						weight[i][j - 1] = 1;
+						weight[i + 1][j - 1] = 1;
+						weight[i - 1][j] = 1;
+						weight[i + 1][j] = 1;
+						weight[i - 1][j + 1] = 1;
+						weight[i][j + 1] = 1;
+						weight[i + 1][j + 1] = 1;
+						firstDrop = false;
+					}
+				}
 			}
 		}
 		

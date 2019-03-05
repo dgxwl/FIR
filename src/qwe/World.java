@@ -33,7 +33,7 @@ public abstract class World extends JPanel {
 					continue;
 				}
 
-				if (!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1)) {
+				if (!(i + 4 > COLS - 1)) {
 					if (board[i][j] == nextColor && board[i + 1][j] == nextColor && board[i + 2][j] == nextColor
 							&& board[i + 3][j] == nextColor && board[i + 4][j] == nextColor) {
 						if (nextColor == Piece.B) {
@@ -44,7 +44,7 @@ public abstract class World extends JPanel {
 					}
 				}
 
-				if (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1)) {
+				if (!(j + 4 > ROWS - 1)) {
 					if (board[i][j] == nextColor && board[i][j + 1] == nextColor && board[i][j + 2] == nextColor
 							&& board[i][j + 3] == nextColor && board[i][j + 4] == nextColor) {
 						if (nextColor == Piece.B) {
@@ -55,8 +55,7 @@ public abstract class World extends JPanel {
 					}
 				}
 
-				if ((!(i + 1 > COLS - 1) || !(i + 2 > COLS - 1) || !(i + 3 > COLS - 1) || !(i + 4 > COLS - 1))
-						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1))) {
+				if (!(i + 4 > COLS - 1) && !(j + 4 > ROWS - 1)) {
 					if (board[i][j] == nextColor && board[i + 1][j + 1] == nextColor && board[i + 2][j + 2] == nextColor
 							&& board[i + 3][j + 3] == nextColor && board[i + 4][j + 4] == nextColor) {
 						if (nextColor == Piece.B) {
@@ -67,8 +66,7 @@ public abstract class World extends JPanel {
 					}
 				}
 
-				if ((!(i - 1 < 0) || !(i - 2 < 0) || !(i - 3 < 0) || !(i - 4 < 0))
-						&& (!(j + 1 > ROWS - 1) || !(j + 2 > ROWS - 1) || !(j + 3 > ROWS - 1) || !(j + 4 > ROWS - 1))) {
+				if (!(i - 4 < 0) && !(j + 4 > ROWS - 1)) {
 					if (board[i][j] == nextColor && board[i - 1][j + 1] == nextColor && board[i - 2][j + 2] == nextColor
 							&& board[i - 3][j + 3] == nextColor && board[i - 4][j + 4] == nextColor) {
 						if (nextColor == Piece.B) {
