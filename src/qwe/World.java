@@ -122,12 +122,12 @@ public abstract class World extends JPanel {
 		
 		if (blackWin) {
 			g.setFont(new Font(null, 0, 50));
-			g.setColor(Color.WHITE);
+			g.setColor(Color.BLACK);
 			g.drawString("黑子赢!", WIDTH / 2, HEIGHT / 2);
 		}
 		if (whiteWin) {
 			g.setFont(new Font(null, 0, 50));
-			g.setColor(Color.BLACK);
+			g.setColor(Color.WHITE);
 			g.drawString("白子赢!", WIDTH / 2, HEIGHT / 2);
 		}
 	}
