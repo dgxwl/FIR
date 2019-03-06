@@ -57,19 +57,6 @@ public class CPUWorld extends World {
 		cpuWeight = countWeight(Piece.W);
 		playerWeight = countWeight(Piece.B);
 		
-		//打桩
-		for (int i = 0; i < cpuWeight.length; i++) {
-			for (int j = 0; j < cpuWeight[i].length; j++) {
-				System.out.println("cpuWeight :  (" + i + ", " + j + ") ====> " + cpuWeight[i][j]);
-			}
-		}
-		for (int i = 0; i < playerWeight.length; i++) {
-			for (int j = 0; j < playerWeight[i].length; j++) {
-				System.out.println("playerWeight :  (" + i + ", " + j + ") ====> " + playerWeight[i][j]);
-			}
-		}
-		/////////////////////////////////////////////////////////////////
-		
 		Max cpuMax = new Max();
 		for (int i = 0; i < cpuWeight.length; i++) {
 			for (int j = 0; j < cpuWeight[i].length; j++) {
@@ -127,7 +114,7 @@ public class CPUWorld extends World {
 					cpuMax.j = place.j;
 				}
 			}
-			board[cpuMax.i][cpuMax.j] = nextColor;System.out.println("attack: (" + cpuMax.i + ", " + cpuMax.j + "), cpuWeight: " + cpuWeight[cpuMax.i][cpuMax.j] + ", " + "playerWeight: " + playerWeight[cpuMax.i][cpuMax.j] + "cpuMaxScore: " + cpuMax.score + ", playerMaxScore: " + playerMax.score);
+			board[cpuMax.i][cpuMax.j] = nextColor;
 		} else {  //def
 			//找玩家方最高分之中电脑最高分位置
 			for (Place place : playerMaxPlaces) {
@@ -137,7 +124,7 @@ public class CPUWorld extends World {
 					playerMax.j = place.j;
 				}
 			}
-			board[playerMax.i][playerMax.j] = nextColor;System.out.println("defence: (" + playerMax.i + ", " + playerMax.j + "), cpuWeight: " + cpuWeight[playerMax.i][playerMax.j] + ", " + "playerWeight: " + playerWeight[playerMax.i][playerMax.j] + "cpuMaxScore: " + cpuMax.score + ", playerMaxScore: " + playerMax.score);
+			board[playerMax.i][playerMax.j] = nextColor;
 		}
 	}
 
